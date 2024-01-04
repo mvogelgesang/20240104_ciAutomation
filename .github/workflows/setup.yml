@@ -1,0 +1,35 @@
+name: Caching SF CLI
+on: 
+  push:
+  workflow_dispatch:
+jobs: 
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - name: Cache node dependencies
+          id: cache-npm
+          uses: actions/cache@v3
+          env: 
+            cache-name: cache-node-dependencies
+          with:
+            path: |
+              ~/.npm
+              ~/.sf
+              node_modules
+            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+              ${{ runner.os }}-build-${{ env.cache-name }}-
+              ${{ runner.os }}-build-
+              ${{ runner.os }}-
+        - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+          name: Cache-miss installing dependencies
+          continue-on-error: true
+          run: npm ci
+  
+        - name: Trigger Jest Tests
+          uses: peter-evans/repository-dispatch@v1
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            event-type: run-jest

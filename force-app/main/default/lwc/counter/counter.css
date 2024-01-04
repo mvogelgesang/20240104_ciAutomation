@@ -1,0 +1,8 @@
+.count {
+  font-size: large;
+  font-weight: bold;
+  padding: var(--lwc-spacingNone, 0) var(--lwc-varSpacingMedium, 1rem);
+}
+.negative {
+  color: red;
+}

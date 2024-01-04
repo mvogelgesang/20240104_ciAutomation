@@ -1,0 +1,36 @@
+name: Test JavaScript
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - run-jest
+jobs:
+  testJs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Restore node cache
+        id: cache-npm
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            ~/.npm
+            ~/.sf
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Running Tests
+        run: npm run test -- -- -- --passWithNoTests
