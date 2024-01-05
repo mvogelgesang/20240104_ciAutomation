@@ -33,3 +33,8 @@ jobs:
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
             event-type: run-jest
+        - name: Run Prettier
+          uses: peter-evans/repository-dispatch@v1
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            event-type: run-prettier

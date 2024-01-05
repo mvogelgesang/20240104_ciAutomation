@@ -1,0 +1,25 @@
+name: Prettier
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - run-prettier
+  
+jobs:
+  pretify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - run: npm run prettier
+      - uses: stefanzweifel/git-auto-commit-action@v4.1.6
+        with:
+          commit_message: Apply apex-prettier changes
+          commit_user_name: My GitHub Actions Bot # defaults to "github-actions[bot]"
+          commit_user_email: my-github-actions-bot@example.org # defaults to "41898282+github-actions[bot]@users.noreply.github.com"
+          commit_author: Author <actions@github.com> # defaults to author of the commit that triggered the run
