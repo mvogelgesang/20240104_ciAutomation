@@ -47,7 +47,7 @@ jobs:
           # This data can be any valid JSON from a previous step in the GitHub Action
           payload: |
             {
-              "branch": ${{ github.head_ref }},
+              "developer": ${{ github.triggering_actor }},
               "status": ${{ job.status }},
               "repository": ${{ github.repository }}
             }
