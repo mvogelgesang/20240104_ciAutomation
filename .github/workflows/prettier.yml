@@ -4,7 +4,7 @@ on:
   repository_dispatch:
     types:
       - run-prettier
-  
+
 jobs:
   pretify:
     runs-on: ubuntu-latest
