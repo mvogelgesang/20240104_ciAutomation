@@ -36,7 +36,7 @@ jobs:
       - name: Run Prettier
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}          
+          token: ${{ secrets.GITHUB_TOKEN }}
           event-type: run-prettier
       - name: Send custom JSON data to Slack workflow
         id: slack
