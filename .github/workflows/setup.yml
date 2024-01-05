@@ -47,9 +47,9 @@ jobs:
           # This data can be any valid JSON from a previous step in the GitHub Action
           payload: |
             {
-              "developer": ${{ github.triggering_actor }},
-              "status": ${{ job.status }},
-              "repository": ${{ github.repository }}
+              "developer": "${{ github.triggering_actor }}",
+              "status": "${{ job.status }}",
+              "repository": "${{ github.repository }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
