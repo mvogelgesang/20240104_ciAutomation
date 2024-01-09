@@ -30,6 +30,7 @@ jobs:
         continue-on-error: true
         run: |
           npm ci
+          npm i -g @salesforce/cli
           sf plugins install @salesforce/sfdx-scanner
 
       - name: Trigger Jest Tests
