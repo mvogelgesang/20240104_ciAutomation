@@ -17,8 +17,8 @@ jobs:
           token: ${{ secrets.ISV_SETUP_BEST_PRACTICES }}
       - uses: actions/setup-java@v4
         with:
-          distribution: 'zulu' # See 'Supported distributions' for available options
-          java-version: '21'
+          distribution: "zulu" # See 'Supported distributions' for available options
+          java-version: "21"
       - name: Restore node cache
         id: cache-npm
         uses: actions/cache/restore@v3
