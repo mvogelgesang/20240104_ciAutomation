@@ -34,6 +34,6 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Run SF Scanner
-        run: sf scanner run -- -- -- --target force-app --json -s 4
+        run: npx sf scanner run -- -- -- --target force-app --json -s 4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
