@@ -33,12 +33,7 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: Run SFDX Scanner - Report findings as comments
-        uses: mitchspano/sfdx-scan-pull-request@v0.1.15
-        with:
-          target: force-app
-          pmdconfig: masterRuleset.xml
-          severity-threshold: 4
-          strictly-enforced-rules: '[{ "engine": "pmd", "category": "Performance", "rule": "AvoidDebugStatements" }]'
+      - name: Run SF Scanner
+        run: sf scanner run -- -- -- --target force-app --json -s 4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
